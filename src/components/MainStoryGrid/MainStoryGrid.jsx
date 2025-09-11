@@ -12,37 +12,50 @@ import MainStory from '../MainStory';
 import SecondaryStory from '../SecondaryStory';
 import OpinionStory from '../OpinionStory';
 import Advertisement from '../Advertisement';
+import {COLORS} from "../../constants.js";
 
 const MainStoryGrid = () => {
-  return (
-    <Wrapper>
-      <MainStorySection>
-        <MainStory {...MAIN_STORY} />
-      </MainStorySection>
+    return (
+        <Wrapper>
+            <MainStorySection>
+                <MainStory {...MAIN_STORY} />
+            </MainStorySection>
 
-      <SecondaryStorySection>
-        <StoryList>
-          {SECONDARY_STORIES.map((story, index) => (
-            <SecondaryStory key={story.id} {...story} />
-          ))}
-        </StoryList>
-      </SecondaryStorySection>
+            <SecondaryStorySection>
+                <StoryList>
+                    {SECONDARY_STORIES.map((story, index) => (
+                        <VerticalStoryWrapper key={story.id}>
+                            <SecondaryStory {...story} />
+                        </VerticalStoryWrapper>
+                    ))}
+                </StoryList>
+            </SecondaryStorySection>
 
-      <OpinionSection>
-        <SectionTitle>Opinion</SectionTitle>
-        <StoryList>
-          {OPINION_STORIES.map((story, index) => (
-            <OpinionStory key={story.id} {...story} />
-          ))}
-        </StoryList>
-      </OpinionSection>
+            <OpinionSection>
+                <SectionTitle>Opinion</SectionTitle>
+                <StoryList>
+                    {OPINION_STORIES.map((story, index) => (
+                        <VerticalStoryWrapper key={story.id}>
+                            <OpinionStory {...story} />
+                        </VerticalStoryWrapper>
+                    ))}
+                </StoryList>
+            </OpinionSection>
 
-      <AdvertisementSection>
-        <Advertisement />
-      </AdvertisementSection>
-    </Wrapper>
-  );
+            <AdvertisementSection>
+                <Advertisement/>
+            </AdvertisementSection>
+        </Wrapper>
+    );
 };
+
+const VerticalStoryWrapper = styled.div`
+    &:not(:first-of-type) {
+        border-top: 1px solid ${COLORS.gray[300]};
+        padding-top: 16px;
+        margin-top: 16px;
+    }
+`;
 
 const Wrapper = styled.div`
   display: grid;
